@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Flashcard</string>
+    <string name="add">AJOUTER UNE NOUVELLE CARTE</string>
+    <string name="create">CREER UN NOUVEAU JEU DE CARTE</string>
+    <string name="delete">SUPPRIMER UN JEU DE CARTE</string>
+
 </resources>

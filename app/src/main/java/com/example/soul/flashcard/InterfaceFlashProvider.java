@@ -3,6 +3,7 @@ package com.example.soul.flashcard;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.net.Uri;
 import android.util.Log;
@@ -69,6 +70,24 @@ public class InterfaceFlashProvider {
         }catch (SQLiteConstraintException e){
             Log.d("Erro:",e.getMessage());
         }
+    }
+
+    public String[] getJeux(){
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("content").authority(autorithy).appendPath(TABLE_JEUX);
+        Uri uri = builder.build();
+        Cursor c = contentResolver.query(uri,null,null,null,null);
+        String[] noms;
+        if(c != null) {
+            noms = new String[c.getCount()];
+            int i = 0;
+            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+                noms[i++] = c.getString(0);
+            }
+        }else{
+            noms = new String[0];
+        }
+        return noms;
     }
 
     public void init(){

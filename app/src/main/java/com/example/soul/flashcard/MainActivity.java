@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View view){
-        Intent intent = new Intent();
+        Intent intent = new Intent(this,ShowGameToAddCardActivity.class);
+        intent.putExtra("option",true);
+        startActivity(intent);
     }
 
     public void create(View view){

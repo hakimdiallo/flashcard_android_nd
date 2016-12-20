@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
         add = (Button) findViewById(R.id.buttonAdd);
         create = (Button) findViewById(R.id.buttonCreate);
         delete = (Button) findViewById(R.id.buttonDelete);
+
+        InterfaceFlashProvider fp = new InterfaceFlashProvider(this);
+        fp.init();
     }
 
     public void add(View view){

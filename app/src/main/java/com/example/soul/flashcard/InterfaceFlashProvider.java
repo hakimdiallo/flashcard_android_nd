@@ -37,7 +37,8 @@ public class InterfaceFlashProvider {
         contentResolver = c.getContentResolver();
     }
 
-    public void insertIntoJeux(String nom){
+    public boolean insertIntoJeux(String nom){
+        boolean check = true;
         ContentValues values = new ContentValues();
         values.put(COLONNE_NOM,nom);
 
@@ -49,11 +50,14 @@ public class InterfaceFlashProvider {
             contentResolver.insert(uri,values);
             Log.d("Insertion:","Sucess of insertion...");
         }catch (SQLiteConstraintException e){
+            check = false;
             Log.d("Erro:",e.getMessage());
         }
+        return check;
     }
 
-    public void insertIntoCarte(String nom, String question, String reponse, int prio){
+    public boolean insertIntoCarte(String nom, String question, String reponse, int prio){
+        boolean check = true;
         ContentValues values = new ContentValues();
         values.put(COLONNE_NOM,nom);
         values.put(COLONNE_QUESTION,question);
@@ -68,8 +72,10 @@ public class InterfaceFlashProvider {
             contentResolver.insert(uri,values);
             Log.d("Insertion:","Sucess of insertion...");
         }catch (SQLiteConstraintException e){
+            check = false;
             Log.d("Erro:",e.getMessage());
         }
+        return check;
     }
 
     public String[] getJeux(){
@@ -88,6 +94,13 @@ public class InterfaceFlashProvider {
             noms = new String[0];
         }
         return noms;
+    }
+
+    public void deleteJeux(String nom){
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("content").authority(autorithy).appendPath(TABLE_JEUX);
+        Uri uri = builder.build();
+        int res = contentResolver.delete(uri,null, new String[]{nom});
     }
 
     public void init(){

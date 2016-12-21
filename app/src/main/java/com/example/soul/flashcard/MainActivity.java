@@ -31,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void create(View view){
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, NewGame.class);
+        startActivity(intent);
     }
 
     public void delete(View view){
-        Intent intent = new Intent();
+        Intent intent = new Intent(this,ShowGameToAddCardActivity.class);
+        intent.putExtra("option",false);
+        startActivity(intent);
     }
 }

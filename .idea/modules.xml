@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Flashcard.iml" filepath="$PROJECT_DIR$/Flashcard.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flashcard_android_nd.iml" filepath="$PROJECT_DIR$/flashcard_android_nd.iml" />
     </modules>
   </component>
 </project>

@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 
 public class ShowGameToAddCardActivity extends AppCompatActivity {
     private boolean options;
+    InterfaceFlashProvider fp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,7 @@ public class ShowGameToAddCardActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listview);
 
-        InterfaceFlashProvider fp = new InterfaceFlashProvider(this);
+        fp = new InterfaceFlashProvider(this);
         String[] noms = fp.getJeux();
 
         ArrayList<String> al = new ArrayList<String>();
@@ -46,7 +47,8 @@ public class ShowGameToAddCardActivity extends AppCompatActivity {
                     in.putExtra("nom",nom);
                     startActivity(in);
                 }else{
-                    //delete here
+                    fp.deleteJeux(nom);
+                    adapter.remove(nom);
                 }
             }
         });

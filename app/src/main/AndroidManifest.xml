@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddNewCardActivity" />
-        <activity android:name=".ShowGameToAddCardActivity"></activity>
+        <activity android:name=".ShowGameToAddCardActivity"/>
+        <activity android:name=".NewGame"/>
     </application>
 
 </manifest>

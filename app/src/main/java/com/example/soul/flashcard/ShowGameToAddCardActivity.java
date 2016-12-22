@@ -27,6 +27,8 @@ public class ShowGameToAddCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_game_to_add_card);
 
+        overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+
         Intent intent = getIntent();
         options = intent.getBooleanExtra("option",false);
 

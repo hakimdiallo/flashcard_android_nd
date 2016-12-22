@@ -29,6 +29,8 @@ public class NewGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newgame);
 
+        overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+
         create = (Button) findViewById(R.id.create);
         create.setEnabled(false);
 

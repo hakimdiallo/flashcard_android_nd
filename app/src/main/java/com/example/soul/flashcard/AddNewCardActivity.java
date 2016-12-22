@@ -17,10 +17,12 @@ public class AddNewCardActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_card);
 
+        overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+        
         save = (Button) findViewById(R.id.save);
         save.setEnabled(false);
 
@@ -31,6 +33,7 @@ public class AddNewCardActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 q = false;
+                save.setEnabled(false);
             }
 
             @Override
@@ -53,6 +56,7 @@ public class AddNewCardActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 r = false;
+                save.setEnabled(false);
             }
 
             @Override
@@ -75,6 +79,7 @@ public class AddNewCardActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 p = false;
+                save.setEnabled(false);
             }
 
             @Override

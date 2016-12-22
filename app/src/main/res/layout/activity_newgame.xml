@@ -13,18 +13,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Enter The Subject"/>
+        android:text="@string/name"/>
     <EditText
         android:id="@+id/name"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="new subject"/>
+        android:hint="@string/saisie"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CREATE"
-        android:onClick="create"/>
+        android:text="@string/creer"
+        android:onClick="create"
+        android:id="@+id/create"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

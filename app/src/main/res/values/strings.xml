@@ -3,5 +3,11 @@
     <string name="add">AJOUTER UNE NOUVELLE CARTE</string>
     <string name="create">CREER UN NOUVEAU JEU DE CARTE</string>
     <string name="delete">SUPPRIMER UN JEU DE CARTE</string>
-
+    <string name="question">Question:</string>
+    <string name="reponse">Réponse</string>
+    <string name="prio">Niveau de difficulté:</string>
+    <string name="save">Enregistrer</string>
+    <string name="creer">Créer</string>
+    <string name="name">Nom du jeu:</string>
+    <string name="saisie">Veuillez saisir le nom du jeu</string>
 </resources>

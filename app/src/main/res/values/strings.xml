@@ -10,4 +10,10 @@
     <string name="creer">Créer</string>
     <string name="name">Nom du jeu:</string>
     <string name="saisie">Veuillez saisir le nom du jeu</string>
+    <string name="oui">Oui</string>
+    <string name="non">Non</string>
+    <string name="deleted">Le jeu a bien été supprimé.</string>
+    <string name="messageDelete">Etes vous sur de vouloir supprimer le jeu?</string>
+    <string name="titleDelete">Suppimer jeu?</string>
+    <string name="cancelDelete">La supression du jeu a été annulée.</string>
 </resources>

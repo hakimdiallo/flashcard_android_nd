@@ -18,20 +18,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonCreate"
         android:text="@string/create"
-        android:onClick="create"/>
+        android:onClick="create"
+        android:theme="@style/MyButton"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonAdd"
         android:text="@string/add"
-        android:onClick="add"/>
+        android:onClick="add"
+        android:theme="@style/MyButton"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonDelete"
         android:text="@string/delete"
-        android:onClick="delete"/>
+        android:onClick="delete"
+        android:theme="@style/MyButton"/>
 
 </LinearLayout>

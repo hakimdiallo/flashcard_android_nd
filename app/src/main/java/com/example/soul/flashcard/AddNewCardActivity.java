@@ -22,7 +22,7 @@ public class AddNewCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_card);
 
         overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
-        
+
         save = (Button) findViewById(R.id.save);
         save.setEnabled(false);
 

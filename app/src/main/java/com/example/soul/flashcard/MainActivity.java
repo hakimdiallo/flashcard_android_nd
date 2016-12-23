@@ -1,6 +1,5 @@
 package com.example.soul.flashcard;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,19 +25,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View view){
-        Intent intent = new Intent(this,ShowGameToAddCardActivity.class);
-        intent.putExtra("option",true);
+        Intent intent = new Intent(this,ShowGameToAddCard.class);
+        intent.putExtra("option",1);
         startActivity(intent);
     }
 
     public void create(View view){
-        Intent intent = new Intent(this, NewGame.class);
+        Intent intent = new Intent(this, AddNewGame.class);
         startActivity(intent);
     }
 
     public void delete(View view){
-        Intent intent = new Intent(this,ShowGameToAddCardActivity.class);
-        intent.putExtra("option",false);
+        Intent intent = new Intent(this,ShowGameToAddCard.class);
+        intent.putExtra("option",2);
+        startActivity(intent);
+    }
+
+    public void jouer(View view){
+        Intent intent = new Intent(this,ShowGameToAddCard.class);
+        intent.putExtra("option",3);
         startActivity(intent);
     }
 }

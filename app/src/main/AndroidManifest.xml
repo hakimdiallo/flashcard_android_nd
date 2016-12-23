@@ -15,9 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddNewCardActivity" />
-        <activity android:name=".ShowGameToAddCardActivity"/>
-        <activity android:name=".NewGame"/>
+        <activity android:name=".AddNewCard" />
+        <activity android:name=".ShowGameToAddCard"/>
+        <activity android:name=".AddNewGame"/>
+        <activity android:name=".ChooseGame"/>
+        <activity android:name=".PlayAGame"/>
     </application>
 
 </manifest>

@@ -103,11 +103,44 @@ public class InterfaceFlashProvider {
         int res = contentResolver.delete(uri,null, new String[]{nom});
     }
 
+    public ArrayList<String> getQuestion(String sujet, String prio){
+        ArrayList<String> res = new ArrayList<String>();
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("content").authority(autorithy).appendPath("questions");
+        Uri uri = builder.build();
+        Cursor cursor = contentResolver.query(uri,null,null,new String[]{sujet,prio},null);
+        if(cursor !=null){
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
+                res.add(cursor.getString(0));
+            }
+        }
+        return res;
+    }
+
+    public ArrayList<String> getAnswer(String sujet, String prio){
+        ArrayList<String> res = new ArrayList<String>();
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("content").authority(autorithy).appendPath("reponses");
+        Uri uri = builder.build();
+        Cursor cursor = contentResolver.query(uri,null,null,new String[]{sujet,prio},null);
+        if(cursor !=null){
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
+                res.add(cursor.getString(0));
+            }
+        }
+        return res;
+    }
+
     public void init(){
-        insertIntoJeux("maths");
-        insertIntoJeux("histoire");
-        insertIntoJeux("français");
-        insertIntoCarte("maths","2x2?","4",1);
-        insertIntoCarte("histoire","napoleaon bonaparte","kexkexkex",5);
+        insertIntoJeux("MATHS");
+        insertIntoJeux("FRANCAIS");
+        insertIntoJeux("HISTOIRE");
+        insertIntoCarte("MATHS","2x2?","4",1);
+        insertIntoCarte("MATHS","2x3?","6",1);
+        insertIntoCarte("MATHS","9x9?","81",2);
+        insertIntoCarte("MATHS","12x12?","144",3);
+        insertIntoCarte("MATHS","200x200?","40000",4);
+        insertIntoCarte("HISTOIRE","Napoleaon bonaparte","Roi",1);
+        insertIntoCarte("FRANCAIS","Tomber dans les pommes","Evanouir",2);
     }
 }

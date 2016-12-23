@@ -1,9 +1,5 @@
 package com.example.soul.flashcard;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -17,7 +13,7 @@ import android.widget.TextView;
  * Created by anhndmin on 12/13/16.
  */
 
-public class NewGame extends AppCompatActivity {
+public class AddNewGame extends AppCompatActivity {
     private static String authority="myflashcard";
     public EditText name_t;
     public TextView res;
@@ -27,7 +23,7 @@ public class NewGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_newgame);
+        setContentView(R.layout.activity_add_new_game);
 
         overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
 

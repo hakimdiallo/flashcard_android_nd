@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddNewCardActivity extends AppCompatActivity {
+public class AddNewCard extends AppCompatActivity {
     private EditText question, reponse, prio;
     private boolean q, r, p;
     private Button save;

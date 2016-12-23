@@ -2,7 +2,6 @@ package com.example.soul.flashcard;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,14 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.NoSuchElementException;
 
-public class ShowGameToAddCardActivity extends AppCompatActivity {
-    private boolean options;
+public class ShowGameToAddCard extends AppCompatActivity {
+    private int options;
     InterfaceFlashProvider fp;
     private String nom;
     @Override
@@ -30,7 +26,7 @@ public class ShowGameToAddCardActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
 
         Intent intent = getIntent();
-        options = intent.getBooleanExtra("option",false);
+        options = intent.getIntExtra("option",0);
 
         ListView listView = (ListView) findViewById(R.id.listview);
 
@@ -47,12 +43,14 @@ public class ShowGameToAddCardActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 nom = adapter.getItem(position);
-                if (options){
-                    Intent in = new Intent(ShowGameToAddCardActivity.this,AddNewCardActivity.class);
+                /* Ajouter une carte*/
+                if (options==1){
+                    Intent in = new Intent(ShowGameToAddCard.this,AddNewCard.class);
                     in.putExtra("nom",nom);
                     startActivity(in);
-                }else{
-                    new AlertDialog.Builder(ShowGameToAddCardActivity.this)
+                /*Supprimer un jeu*/
+                }else if(options==2){
+                    new AlertDialog.Builder(ShowGameToAddCard.this)
                             .setTitle(R.string.titleDelete)
                             .setMessage(R.string.messageDelete)
                             .setPositiveButton(R.string.oui, new DialogInterface.OnClickListener() {
@@ -60,17 +58,23 @@ public class ShowGameToAddCardActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     fp.deleteJeux(nom);
                                     adapter.remove(nom);
-                                    Toast.makeText(ShowGameToAddCardActivity.this,R.string.deleted,Toast.LENGTH_LONG).show();
+                                    Toast.makeText(ShowGameToAddCard.this,R.string.deleted,Toast.LENGTH_LONG).show();
                                 }
                             })
                             .setNegativeButton(R.string.non, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(ShowGameToAddCardActivity.this,R.string.cancelDelete,Toast.LENGTH_LONG).show();
+                                    Toast.makeText(ShowGameToAddCard.this,R.string.cancelDelete,Toast.LENGTH_LONG).show();
                                 }
                     })
                     .show();
 
+                }
+                /* Afficher un sujet pour choisir a jouer */
+                else if(options==3){
+                    Intent in = new Intent(ShowGameToAddCard.this,ChooseGame.class);
+                    in.putExtra("nom",nom);
+                    startActivity(in);
                 }
             }
         });

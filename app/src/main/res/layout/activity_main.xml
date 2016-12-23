@@ -36,5 +36,12 @@
         android:text="@string/delete"
         android:onClick="delete"
         android:theme="@style/MyButton"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonJouer"
+        android:text="JOUER UNE NOUVELLE PARTIE"
+        android:onClick="jouer"
+        android:theme="@style/MyButton"/>
 
 </LinearLayout>

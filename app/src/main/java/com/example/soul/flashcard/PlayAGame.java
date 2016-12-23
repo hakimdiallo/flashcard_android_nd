@@ -68,6 +68,9 @@ public class PlayAGame extends AppCompatActivity {
 
     public void suivant(View view){
         if(!questions.isEmpty() && !reponses.isEmpty()){
+            votre_reponse.setText("");
+            annonce_reponse.setText("");
+            reponse_t.setText("");
             question = questions.remove(0);
             reponse = reponses.remove(0);
 

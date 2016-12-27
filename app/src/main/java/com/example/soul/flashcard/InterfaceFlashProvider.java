@@ -56,6 +56,24 @@ public class InterfaceFlashProvider {
         return check;
     }
 
+    public boolean jeuxExist(String nom){
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("content").authority(autorithy).appendPath("jeux_nom");
+        Uri uri = builder.build();
+        Cursor c = contentResolver.query(uri,null,null,new String[]{nom},null);
+        if (c.getCount() != 0){
+            return true;
+        }
+        return false;
+    }
+
+    public void insertCarte(Carte c){
+        if (!jeuxExist(c.getNom_jeux())){
+            insertIntoJeux(c.getNom_jeux());
+        }
+        insertIntoCarte(c.getNom_jeux(),c.getQuestion(),c.getReponse(),c.getPrio());
+    }
+
     public boolean insertIntoCarte(String nom, String question, String reponse, int prio){
         boolean check = true;
         ContentValues values = new ContentValues();
@@ -84,7 +102,7 @@ public class InterfaceFlashProvider {
         Uri uri = builder.build();
         Cursor c = contentResolver.query(uri,null,null,null,null);
         String[] noms;
-        if(c != null) {
+        if(c.getCount() != 0) {
             noms = new String[c.getCount()];
             int i = 0;
             for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
@@ -134,13 +152,13 @@ public class InterfaceFlashProvider {
     public void init(){
         insertIntoJeux("MATHS");
         insertIntoJeux("FRANCAIS");
-        insertIntoJeux("HISTOIRE");
+        //insertIntoJeux("HISTOIRE");
         insertIntoCarte("MATHS","2x2?","4",1);
         insertIntoCarte("MATHS","2x3?","6",1);
-        insertIntoCarte("MATHS","9x9?","81",2);
-        insertIntoCarte("MATHS","12x12?","144",3);
-        insertIntoCarte("MATHS","200x200?","40000",4);
-        insertIntoCarte("HISTOIRE","Napoleaon bonaparte","Roi",1);
-        insertIntoCarte("FRANCAIS","Tomber dans les pommes","Evanouir",2);
+        insertIntoCarte("MATHS","9x9?","81",1);
+        insertIntoCarte("MATHS","12x12?","144",1);
+        insertIntoCarte("MATHS","200x200?","40000",1);
+        //insertIntoCarte("HISTOIRE","Napoleaon bonaparte","Roi",1);
+        insertIntoCarte("FRANCAIS","Tomber dans les pommes","Evanouir",1);
     }
 }

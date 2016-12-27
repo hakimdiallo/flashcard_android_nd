@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<cartes>
+    <carte>
+        <nomJeux>Maths</nomJeux>
+        <question>2x2?</question>
+        <reponse>4</reponse>
+        <prio>1</prio>
+    </carte>
+    <carte>
+        <nomJeux>Maths</nomJeux>
+        <question>2x3?</question>
+        <reponse>6</reponse>
+        <prio>1</prio>
+    </carte>
+    <carte>
+        <nomJeux>Maths</nomJeux>
+        <question>2x4?</question>
+        <reponse>8</reponse>
+        <prio>1</prio>
+    </carte>
+    <carte>
+        <nomJeux>Maths</nomJeux>
+        <question>2x2?</question>
+        <reponse>4</reponse>
+        <prio>1</prio>
+    </carte>
+    <carte>
+        <nomJeux>Histoire</nomJeux>
+        <question>Quelle date?</question>
+        <reponse>1988</reponse>
+        <prio>1</prio>
+    </carte>
+    <carte>
+        <nomJeux>Histoire</nomJeux>
+        <question>Napoleon Bonaparte</question>
+        <reponse>Roi</reponse>
+        <prio>1</prio>
+    </carte>
+    <carte>
+        <nomJeux>Economie</nomJeux>
+        <question>homoeconomicus</question>
+        <reponse>individu rationnel</reponse>
+        <prio>1</prio>
+    </carte>
+    <carte>
+        <nomJeux>Grammaire</nomJeux>
+        <question>preposition</question>
+        <reponse>mot invariable</reponse>
+        <prio>1</prio>
+    </carte>
+</cartes>

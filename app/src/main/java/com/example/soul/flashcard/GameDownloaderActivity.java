@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +22,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
 
 public class GameDownloaderActivity extends MenuActivity {
     private TextView good_url;
@@ -91,7 +94,8 @@ public class GameDownloaderActivity extends MenuActivity {
                             //.setAllowedOverRoaming(false)
                             .setTitle("jeux_file")
                             //.setDescription("Something useful. No, really.")
-                            .setDestinationInExternalFilesDir(this,Environment.DIRECTORY_DOWNLOADS, "file.xml")
+                            //.setDestinationInExternalFilesDir(this,Environment.DIRECTORY_DOWNLOADS, "file.xml")
+                            //(.setDestinationInExternalFilesDir(this,Environment.DIRECTORY_DOWNLOADS,"")
                     );
 
             //v.setEnabled(false);
@@ -163,27 +167,19 @@ public class GameDownloaderActivity extends MenuActivity {
 
     BroadcastReceiver onComplete = new BroadcastReceiver() {
         public void onReceive(Context ctxt, Intent intent) {
-            String action = intent.getAction();
-            if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
-                long downloadId = intent.getLongExtra(
-                        DownloadManager.EXTRA_DOWNLOAD_ID, 0);
-                DownloadManager.Query query = new DownloadManager.Query();
-                query.setFilterById(lastDownload);
-                Cursor c = manager.query(query);
-                if (c.moveToFirst()) {
-                    int columnIndex = c
-                            .getColumnIndex(DownloadManager.COLUMN_STATUS);
-                    if (DownloadManager.STATUS_SUCCESSFUL == c
-                            .getInt(columnIndex)) {
+            long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if(lastDownload == referenceId) {
 
-                        //ImageView view = (ImageView) findViewById(R.id.imageView1);
-                        String uriString = c.getString(c
-                                        .getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
-                        //view.setImageURI(Uri.parse(uriString));
-                    }
+                int ch;
+                ParcelFileDescriptor file;
+                try {
+                    file = manager.openDownloadedFile(lastDownload);
+                    FileParser f = new FileParser(file,getApplicationContext());
+                    f.start();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
-
             //findViewById(R.id.start).setEnabled(true);
         }
     };

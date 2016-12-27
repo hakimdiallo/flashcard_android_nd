@@ -3,7 +3,9 @@ package com.example.soul.flashcard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
  * Created by anhndmin on 12/23/16.
  */
 
-public class ChooseGame extends AppCompatActivity {
+public class ChooseGame extends MenuActivity {
     private String nom;
     Spinner difficulty;
     TextView sujet;
@@ -25,7 +27,11 @@ public class ChooseGame extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_game);
+        //setContentView(R.layout.activity_choose_game);
+        super.onCreateDrawer();
+        overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+        LayoutInflater inflater = getLayoutInflater();
+        inflater.inflate(R.layout.activity_choose_game,(ViewGroup)findViewById(R.id.content_frame));
         Intent intent = getIntent();
         nom = intent.getStringExtra("nom");
 

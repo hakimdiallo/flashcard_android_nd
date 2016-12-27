@@ -4,16 +4,20 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class AddNewCard extends AppCompatActivity {
-    private EditText question, reponse, prio;
-    private boolean q, r, p;
+    private EditText question, reponse;
+    private boolean q, r;
     private Button save;
+    private Spinner spinner;
 
 
     @Override
@@ -26,7 +30,7 @@ public class AddNewCard extends AppCompatActivity {
         save = (Button) findViewById(R.id.save);
         save.setEnabled(false);
 
-        q = r = p = false;
+        q = r = false;
 
         question = (EditText) findViewById(R.id.question);
         question.addTextChangedListener(new TextWatcher() {
@@ -46,7 +50,7 @@ public class AddNewCard extends AppCompatActivity {
                 if (!s.toString().isEmpty()){
                     q = true;
                 }
-                if(q && r && p){
+                if(q && r){
                     save.setEnabled(true);
                 }
             }
@@ -69,34 +73,13 @@ public class AddNewCard extends AppCompatActivity {
                 if (!s.toString().isEmpty()){
                     r = true;
                 }
-                if(q && r && p){
+                if(q && r){
                     save.setEnabled(true);
                 }
             }
         });
-        prio = (EditText) findViewById(R.id.prio);
-        prio.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                p = false;
-                save.setEnabled(false);
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!s.toString().isEmpty()){
-                    p = true;
-                }
-                if(q && r && p){
-                    save.setEnabled(true);
-                }
-            }
-        });
+        spinner = (Spinner) findViewById(R.id.spinner);
 
     }
 
@@ -104,7 +87,8 @@ public class AddNewCard extends AppCompatActivity {
         InterfaceFlashProvider fp = new InterfaceFlashProvider(this);
         String qstr = question.getText().toString();
         String rstr = reponse.getText().toString();
-        int pr = Integer.parseInt(prio.getText().toString());
+        int pr = Integer.parseInt(String.valueOf(spinner.getSelectedItem()));
+        //int pr = Integer.parseInt(prio.getText().toString());
         Intent intent = getIntent();
         String nom = intent.getStringExtra("nom");
         if (fp.insertIntoCarte(nom,qstr,rstr,pr)){

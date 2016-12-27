@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,7 +15,7 @@ import android.widget.TextView;
  * Created by anhndmin on 12/13/16.
  */
 
-public class AddNewGame extends AppCompatActivity {
+public class AddNewGame extends MenuActivity {
     private static String authority="myflashcard";
     public EditText name_t;
     public TextView res;
@@ -23,9 +25,11 @@ public class AddNewGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_game);
-
+        //setContentView(R.layout.activity_add_new_game);
+        super.onCreateDrawer();
         overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+        LayoutInflater inflater = getLayoutInflater();
+        inflater.inflate(R.layout.activity_add_new_game,(ViewGroup)findViewById(R.id.content_frame));
 
         create = (Button) findViewById(R.id.create);
         create.setEnabled(false);
@@ -49,6 +53,8 @@ public class AddNewGame extends AppCompatActivity {
             }
         });
         res = (TextView) findViewById(R.id.result);
+
+
     }
 
     public void create(View view){

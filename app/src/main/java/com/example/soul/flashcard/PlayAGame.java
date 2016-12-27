@@ -3,7 +3,9 @@ package com.example.soul.flashcard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
  * Created by anhndmin on 12/23/16.
  */
 
-public class PlayAGame extends AppCompatActivity {
+public class PlayAGame extends MenuActivity {
     private ArrayList<String> questions, reponses;
     private String question, reponse;
     TextView question_t, reponse_t, annonce, annonce_reponse;
@@ -24,7 +26,11 @@ public class PlayAGame extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_a_game);
+        //setContentView(R.layout.activity_play_a_game);
+        super.onCreateDrawer();
+        overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+        LayoutInflater inflater = getLayoutInflater();
+        inflater.inflate(R.layout.activity_play_a_game,(ViewGroup)findViewById(R.id.content_frame));
         Intent intent = getIntent();
         String nom = intent.getStringExtra("sujet");
         String niveau = intent.getStringExtra("niveau");

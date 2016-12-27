@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Flashcard</string>
+    <string name="app_name_menu">Flashcard Menu</string>
+    <string name="home">ACCUEIL</string>
     <string name="add">AJOUTER UNE NOUVELLE CARTE</string>
     <string name="create">CREER UN NOUVEAU JEU DE CARTE</string>
     <string name="delete">SUPPRIMER UN JEU DE CARTE</string>
-    <string name="jouer">JOUER</string>
+    <string name="jouer">JOUER UNE NOUVELLE PARTIE</string>
     <string name="question">Question:</string>
     <string name="reponse">Réponse</string>
     <string name="votre_reponse">Votre réponse</string>
@@ -23,6 +25,20 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+        <item>5</item>
     </string-array>
     <string name="difficulty_prompt">Default</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Veuillez choisir une méthode:</string>
+    <string name="manual">MANUEL</string>
+    <string name="link">AUTOMATIQUE (LIEN)</string>
+    <string name="download">Télécharger</string>
+    <string name="url">Url:</string>
 </resources>

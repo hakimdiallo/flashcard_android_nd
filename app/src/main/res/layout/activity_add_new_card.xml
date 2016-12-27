@@ -47,11 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/prio"/>
-        <EditText
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:id="@+id/prio"/>
+            android:id="@+id/spinner"
+            android:entries="@array/difficulty"></Spinner>
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"

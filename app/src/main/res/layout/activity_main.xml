@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonCreate"
         android:text="@string/create"
-        android:onClick="create"
+        android:onClick="choose"
         android:theme="@style/MyButton"/>
 
     <Button
@@ -27,7 +27,7 @@
         android:id="@+id/buttonAdd"
         android:text="@string/add"
         android:onClick="add"
-        android:theme="@style/MyButton"/>
+        android:theme="@style/MyButton"/>,
 
     <Button
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonJouer"
-        android:text="JOUER UNE NOUVELLE PARTIE"
+        android:text="@string/jouer"
         android:onClick="jouer"
         android:theme="@style/MyButton"/>
 

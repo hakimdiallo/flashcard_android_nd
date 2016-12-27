@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.soul.flashcard">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,10 +20,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddNewCard" />
-        <activity android:name=".ShowGameToAddCard"/>
-        <activity android:name=".AddNewGame"/>
-        <activity android:name=".ChooseGame"/>
-        <activity android:name=".PlayAGame"/>
+        <activity android:name=".ShowGameToAddCard" />
+        <activity android:name=".AddNewGame" />
+        <activity android:name=".ChooseGame" />
+        <activity android:name=".PlayAGame" />
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GameDownloaderActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 package com.example.soul.flashcard;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +18,9 @@ public class MainActivity extends MenuActivity implements ChooseCreateFragment.O
     private Button add;
     private Button create;
     private Button delete;
+    private ChooseCreateFragment fragment;
+    public static final String F_PREFERENCES = "flashPref";
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +34,18 @@ public class MainActivity extends MenuActivity implements ChooseCreateFragment.O
         InterfaceFlashProvider fp = new InterfaceFlashProvider(this);
         fp.init();
 
+        //preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //SharedPreferences.Editor edit = preferences.edit();
+        //edit.putInt("tempsDeReponse",30);
+        //edit.putInt("dureeInac",5);
+        //edit.commit();
+
         LayoutInflater inflater = getLayoutInflater();
         inflater.inflate(R.layout.activity_main,(ViewGroup)findViewById(R.id.content_frame));
+        if (savedInstanceState == null) {
+            NotificationService ns = new NotificationService(getApplicationContext());
+            ns.sendNotification();
+        }
     }
 
     public void add(View view){
@@ -41,8 +56,8 @@ public class MainActivity extends MenuActivity implements ChooseCreateFragment.O
 
     public void choose(View view){
         FragmentManager fm = getSupportFragmentManager();
-        ChooseCreateFragment cc = new ChooseCreateFragment();
-        cc.show(fm,"Dialog fragment...");
+        fragment = new ChooseCreateFragment();
+        fragment.show(fm,"Dialog fragment...");
         //Intent intent = new Intent(this, AddNewGame.class);
         //startActivity(intent);
     }
@@ -60,11 +75,13 @@ public class MainActivity extends MenuActivity implements ChooseCreateFragment.O
     }
 
     public void create(View view){
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         Intent intent = new Intent(this, AddNewGame.class);
         startActivity(intent);
     }
 
     public void link(View view){
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         Intent intent = new Intent(this, GameDownloaderActivity.class);
         startActivity(intent);
     }

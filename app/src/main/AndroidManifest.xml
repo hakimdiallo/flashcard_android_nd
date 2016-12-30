@@ -28,7 +28,15 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GameDownloaderActivity"></activity>
+        <activity android:name=".GameDownloaderActivity" />
+        <activity android:name=".SettingsActivity" />
+
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".NotificationActivity"></activity>
     </application>
 
 </manifest>

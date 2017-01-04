@@ -76,7 +76,7 @@ public class ShowGameToAddCard extends MenuActivity {
                 }
                 /* Afficher un sujet pour choisir a jouer */
                 else if(options==3){
-                    Intent in = new Intent(ShowGameToAddCard.this,ChooseGame.class);
+                    Intent in = new Intent(ShowGameToAddCard.this,PlayAGame.class);
                     in.putExtra("nom",nom);
                     startActivity(in);
                 }

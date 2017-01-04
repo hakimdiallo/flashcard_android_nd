@@ -30,12 +30,12 @@ public class NotificationActivity extends MenuActivity {
         InterfaceFlashProvider fp = new InterfaceFlashProvider(this);
 
         list = (ListView) findViewById(R.id.listview);
-        String[] noms = fp.getCartes(duree);
+        String[] cartes = fp.getCartes(duree);
 
         ArrayList<String> al = new ArrayList<String>();
-        Collections.addAll(al,noms);
+        Collections.addAll(al, cartes);
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.jeux_view,al);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.jeux_view, al);
         list.setAdapter(adapter);
 
     }

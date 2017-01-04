@@ -35,6 +35,7 @@ public class InterfaceFlashProvider {
     public final static String COLONNE_QUESTION = "question";
     public final static String COLONNE_REPONSE = "reponse";
     public final static String COLONNE_PRIORITY = "prio";
+    public final static String COLONNE_INUT = "lastUse";
 
     public InterfaceFlashProvider(Context c){
         context = c;
@@ -85,6 +86,9 @@ public class InterfaceFlashProvider {
         values.put(COLONNE_QUESTION,question);
         values.put(COLONNE_REPONSE,reponse);
         values.put(COLONNE_PRIORITY,prio);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String date = format.format(new Date());
+        values.put(COLONNE_INUT,date);
 
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("content").authority(autorithy).appendPath(TABLE_CARTE);
@@ -127,24 +131,24 @@ public class InterfaceFlashProvider {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String startDate = format.format(thatDay);
-        String endDate = format.format(today);
+        //String endDate = format.format(today);
 
         Uri.Builder builder = new Uri.Builder();
-        builder.scheme("content").authority(autorithy).appendPath(TABLE_JEUX);
+        builder.scheme("content").authority(autorithy).appendPath("cartes_inut");
         Uri uri = builder.build();
 
-        Cursor c = contentResolver.query(uri,null,null,null,null);
-        String[] noms;
+        Cursor c = contentResolver.query(uri,null,null,new String[]{startDate},null);
+        String[] cartes;
         if(c.getCount() != 0) {
-            noms = new String[c.getCount()];
+            cartes = new String[c.getCount()];
             int i = 0;
             for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
-                noms[i++] = c.getString(0);
+                cartes[i++] = c.getString(0);
             }
         }else{
-            noms = new String[0];
+            cartes = new String[0];
         }
-        return noms;
+        return cartes;
     }
 
     public void deleteJeux(String nom){

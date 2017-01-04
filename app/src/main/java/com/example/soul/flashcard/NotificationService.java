@@ -30,11 +30,11 @@ public class NotificationService extends Service {
     }
 
     public void sendNotification(){
-        Intent intent = new Intent(context, Notification.class);
+        Intent intent = new Intent(context, NotificationActivity.class);
         //intent.setAction()
 
         TaskStackBuilder builder = TaskStackBuilder.create(context);
-        builder.addParentStack(Notification.class);
+        builder.addParentStack(NotificationActivity.class);
         builder.addNextIntent(intent);
 
         PendingIntent pendingIntent = builder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);

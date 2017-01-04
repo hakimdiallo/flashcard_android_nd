@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class AddNewCard extends AppCompatActivity {
+public class AddNewCard extends MenuActivity {
     private EditText question, reponse;
     private boolean q, r;
     private Button save;
@@ -23,9 +25,12 @@ public class AddNewCard extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_card);
-
+        //setContentView(R.layout.activity_add_new_card);
+        super.onCreateDrawer();
         overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+
+        LayoutInflater inflater = getLayoutInflater();
+        inflater.inflate(R.layout.activity_add_new_card,(ViewGroup)findViewById(R.id.content_frame));
 
         save = (Button) findViewById(R.id.save);
         save.setEnabled(false);

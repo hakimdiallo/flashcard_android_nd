@@ -1,89 +1,125 @@
-package com.example.soul.flashcard;
-
+package com.example.soul.flashcard;//import android.app.Fragment;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.soul.flashcard.R;
+import com.example.soul.flashcard.ScreenSlidePageFragment;
 
 import java.util.ArrayList;
 
-/**
- * Created by anhndmin on 12/23/16.
- */
-
 public class PlayAGame extends MenuActivity {
-    private ArrayList<String> questions, reponses;
-    private String question, reponse;
-    TextView question_t, reponse_t, annonce, annonce_reponse;
-    EditText votre_reponse;
+    /**
+     * The number of pages (wizard steps) to show in this demo.
+     */
+    private int num_pages ;
 
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter mPagerAdapter;
+
+    private String sujet,question;
+    private ArrayList<String[]> listQuestionReponse;
+
+    boolean cardFlipped = false;
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        int i =0;
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_play_a_game);
         super.onCreateDrawer();
         overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+
         LayoutInflater inflater = getLayoutInflater();
         inflater.inflate(R.layout.activity_play_a_game,(ViewGroup)findViewById(R.id.content_frame));
-        Intent intent = getIntent();
-        String nom = intent.getStringExtra("sujet");
-        String niveau = intent.getStringExtra("niveau");
 
-        question_t = (TextView) findViewById(R.id.question2);
-        votre_reponse = (EditText) findViewById(R.id.reponse2);
-        reponse_t = (TextView) findViewById(R.id.reponse3);
-        annonce= (TextView) findViewById(R.id.annonce);
-        annonce_reponse=(TextView) findViewById(R.id.annonce_reponse3);
-
-        annonce.setText("SUJET: "+nom+"-Niveau: "+niveau);
-
+        Intent intent= getIntent();
+        sujet = intent.getStringExtra("nom");
         InterfaceFlashProvider ip = new InterfaceFlashProvider(this);
-        questions = ip.getQuestion(nom,niveau);
-        reponses = ip.getAnswer(nom,niveau);
+        listQuestionReponse = ip.getQuestionReponse(sujet,"1");
 
-        if(!questions.isEmpty() && !reponses.isEmpty()){
-            question = questions.remove(0);
-            reponse = reponses.remove(0);
+        num_pages = listQuestionReponse.size();
 
-            question_t.setText(question);
-        }
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+
 
     }
 
-    public void verifier(View view){
-        String votre_res = votre_reponse.getText().toString();
-
-        if(reponse.equals(votre_res)){
-            Toast.makeText(this,"BRAVO!!!",Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(this,"MAUVAISE REPONSE!!",Toast.LENGTH_SHORT).show();
+    @Override
+    public void onBackPressed() {
+        if (mPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
     }
 
-    public void reponse(View view){
-        annonce_reponse.setText("Réponse: ");
-        reponse_t.setText(reponse);
+    /**
+     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * sequence.
+     */
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            ScreenSlidePageFragment page = new ScreenSlidePageFragment();
+            page.setQuestion(listQuestionReponse.get(position)[0]);
+            page.setResponse(listQuestionReponse.get(position)[1]);
+            return page;
+        }
+
+        @Override
+        public int getCount() {
+            return num_pages;
+        }
     }
 
-    public void suivant(View view){
-        if(!questions.isEmpty() && !reponses.isEmpty()){
-            votre_reponse.setText("");
-            annonce_reponse.setText("");
-            reponse_t.setText("");
-            question = questions.remove(0);
-            reponse = reponses.remove(0);
+    public void flipCard() {
+        Fragment newFragment;
+        if (cardFlipped) {
+            newFragment = new ScreenSlidePageFragment.QuestionFragment();
+        } else {
+            newFragment = new ScreenSlidePageFragment.ReponseFragment();
+        }
 
-            question_t.setText(question);
-        }
-        else {
-            Toast.makeText(this,"C'est la dernière question de ce niveau!!!",Toast.LENGTH_SHORT).show();
-        }
+        getSupportFragmentManager()
+                .beginTransaction()
+                /*.setCustomAnimations(
+                        R.animator.card_flip_right_in,
+                        R.animator.card_flip_right_out,
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out)*/
+                .replace(R.id.container, newFragment)
+                .commit();
+
+        cardFlipped = !cardFlipped;
     }
 }
+

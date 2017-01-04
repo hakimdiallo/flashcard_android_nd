@@ -22,7 +22,6 @@
         <activity android:name=".AddNewCard" />
         <activity android:name=".ShowGameToAddCard" />
         <activity android:name=".AddNewGame" />
-        <activity android:name=".ChooseGame" />
         <activity android:name=".PlayAGame" />
         <activity
             android:name=".MenuActivity"

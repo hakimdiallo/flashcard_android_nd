@@ -158,29 +158,15 @@ public class InterfaceFlashProvider {
         int res = contentResolver.delete(uri,null, new String[]{nom});
     }
 
-    public ArrayList<String> getQuestion(String sujet, String prio){
-        ArrayList<String> res = new ArrayList<String>();
+    public ArrayList<String[]> getQuestionReponse(String sujet, String prio){
+        ArrayList<String[]> res = new ArrayList<String[]>();
         Uri.Builder builder = new Uri.Builder();
-        builder.scheme("content").authority(autorithy).appendPath("questions");
+        builder.scheme("content").authority(autorithy).appendPath("questions_reponses");
         Uri uri = builder.build();
         Cursor cursor = contentResolver.query(uri,null,null,new String[]{sujet,prio},null);
         if(cursor !=null){
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
-                res.add(cursor.getString(0));
-            }
-        }
-        return res;
-    }
-
-    public ArrayList<String> getAnswer(String sujet, String prio){
-        ArrayList<String> res = new ArrayList<String>();
-        Uri.Builder builder = new Uri.Builder();
-        builder.scheme("content").authority(autorithy).appendPath("reponses");
-        Uri uri = builder.build();
-        Cursor cursor = contentResolver.query(uri,null,null,new String[]{sujet,prio},null);
-        if(cursor !=null){
-            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
-                res.add(cursor.getString(0));
+                res.add(new String[]{cursor.getString(0),cursor.getString(1)});
             }
         }
         return res;

@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.net.Uri;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by soul on 13/12/16.
@@ -100,6 +104,35 @@ public class InterfaceFlashProvider {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("content").authority(autorithy).appendPath(TABLE_JEUX);
         Uri uri = builder.build();
+        Cursor c = contentResolver.query(uri,null,null,null,null);
+        String[] noms;
+        if(c.getCount() != 0) {
+            noms = new String[c.getCount()];
+            int i = 0;
+            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+                noms[i++] = c.getString(0);
+            }
+        }else{
+            noms = new String[0];
+        }
+        return noms;
+    }
+
+    public String[] getCartes(int duree){
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        cal.add(Calendar.DATE,-duree);
+        Date thatDay = cal.getTime();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String startDate = format.format(thatDay);
+        String endDate = format.format(today);
+
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("content").authority(autorithy).appendPath(TABLE_JEUX);
+        Uri uri = builder.build();
+
         Cursor c = contentResolver.query(uri,null,null,null,null);
         String[] noms;
         if(c.getCount() != 0) {

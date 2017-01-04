@@ -176,7 +176,7 @@ public class GameDownloaderActivity extends MenuActivity {
                     file = manager.openDownloadedFile(lastDownload);
                     FileParser f = new FileParser(file,getApplicationContext());
                     f.start();
-                } catch (FileNotFoundException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

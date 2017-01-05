@@ -34,4 +34,10 @@
     <style name="Body1" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textSize">26dp</item>
     </style>
+    <style name="BodyQR">
+        <item name="android:background">#660066</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
 </resources>

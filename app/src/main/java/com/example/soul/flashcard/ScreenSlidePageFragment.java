@@ -1,11 +1,13 @@
 package com.example.soul.flashcard;
 
-import android.app.Activity;
-import android.support.v4.app.Fragment;
 
+import android.content.Context;
+import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -17,10 +19,14 @@ import android.widget.TextView;
  */
 
 public class ScreenSlidePageFragment extends Fragment {
-    boolean cardFlipped = false;
-    TextView viewQuest, viewRes;
-    String question;
-    String reponse;
+    private boolean cardFlipped = false;
+    private TextView viewQuest, viewRes;
+    private String question, reponse;
+    private CountDownTimer timer;
+    private TextView textTimer;
+    private String strTime;
+    private Context context;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +39,34 @@ public class ScreenSlidePageFragment extends Fragment {
                 flipCard();
             }
         });
+
+        textTimer = (TextView) rootView.findViewById(R.id.timer);
+        long time = PreferenceManager.getDefaultSharedPreferences(context).getInt(getString(R.string.tdr),15);
+        textTimer.setText(String.valueOf(time));
+        timer = new CountDownTimer(time * 1000,1000) {
+            @Override
+            public void onTick(long l) {
+                long s = l/1000;
+                strTime = String.valueOf(s);
+                textTimer.setText(strTime);
+            }
+
+            @Override
+            public void onFinish() {
+                textTimer.setText("00");
+                ReponseFragment fragment = new ReponseFragment();
+                fragment.setResponse(reponse);
+                getChildFragmentManager()
+                        .beginTransaction()
+                /*.setCustomAnimations(
+                        R.anim.flip_right_in,
+                        R.anim.flip_right_out,
+                        R.anim.flip_left_in,
+                        R.anim.flip_left_out)*/
+                        .replace(R.id.container, fragment)
+                        .commit();
+            }
+        }.start();
 
         QuestionFragment qf = new QuestionFragment();
         qf.setQuestion(question);
@@ -48,6 +82,10 @@ public class ScreenSlidePageFragment extends Fragment {
 
     public void setResponse(String s){
         reponse = s;
+    }
+
+    public void setContext(Context c){
+        context = c;
     }
 
     /**

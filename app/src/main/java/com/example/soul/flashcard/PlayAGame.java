@@ -11,6 +11,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -63,7 +64,6 @@ public class PlayAGame extends MenuActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
-
     }
 
     @Override
@@ -92,6 +92,8 @@ public class PlayAGame extends MenuActivity {
             ScreenSlidePageFragment page = new ScreenSlidePageFragment();
             page.setQuestion(listQuestionReponse.get(position)[0]);
             page.setResponse(listQuestionReponse.get(position)[1]);
+            listQuestionReponse.remove(position);
+            page.setContext(getApplicationContext());
             return page;
         }
 
@@ -99,27 +101,7 @@ public class PlayAGame extends MenuActivity {
         public int getCount() {
             return num_pages;
         }
-    }
 
-    public void flipCard() {
-        Fragment newFragment;
-        if (cardFlipped) {
-            newFragment = new ScreenSlidePageFragment.QuestionFragment();
-        } else {
-            newFragment = new ScreenSlidePageFragment.ReponseFragment();
-        }
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                /*.setCustomAnimations(
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out,
-                        R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out)*/
-                .replace(R.id.container, newFragment)
-                .commit();
-
-        cardFlipped = !cardFlipped;
     }
 }
 

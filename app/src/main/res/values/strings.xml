@@ -24,8 +24,8 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <!--item>4</item>
+        <item>5</item-->
     </string-array>
     <string name="difficulty_prompt">Default</string>
     <string name="title_activity_menu">MenuActivity</string>
@@ -48,5 +48,6 @@
     <string name="aftersave">Les paramètres ont bien été enregistrés.</string>
     <string name="tdr">tempsDeReponse</string>
     <string name="di">dureeInac</string>
-
+    <string name="next">Suivant</string>
+    <string name="changeDiff">Modifier la difficulté de la carte</string>
 </resources>
